@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - RER EVENTS</title>
+    <style>
+        /* All CSS from home page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #f8a5c2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a:hover {
+            color: #f8a5c2;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #f8a5c2;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #1a1a2e;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #f8a5c2);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Services specific styles */
+        .services {
+            background-color: #f0f0f0;
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.2s; }
+        .service-card:nth-child(2) { animation-delay: 0.4s; }
+        .service-card:nth-child(3) { animation-delay: 0.6s; }
+        .service-card:nth-child(4) { animation-delay: 0.8s; }
+        .service-card:nth-child(5) { animation-delay: 1s; }
+        .service-card:nth-child(6) { animation-delay: 1.2s; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .service-features li i {
+            color: #f8a5c2;
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin: 3rem auto;
+            max-width: 1200px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-tier {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-tier:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-tier h4 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f8a5c2;
+            margin-bottom: 1.5rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li i {
+            color: #ff6b6b;
+            margin-right: 0.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #f8a5c2);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #f8a5c2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .process-step h4 {
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .service-card {
+                width: 100%;
+            }
+
+            .pricing-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" style= "width: 80px; height: 80px;">
+            <h1>RER EVENTS</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="designs.html">Designs</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="services" style="margin-top: 80px;">
+        <h2 class="section-title">Our Comprehensive Services</h2>
+        
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <h3>Full Wedding Planning</h3>
+                <p>From venue selection to day-of coordination, we handle every detail of your wedding to ensure perfection.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Venue sourcing and visits</li>
+                    <li><i class="fas fa-check"></i> Vendor management</li>
+                    <li><i class="fas fa-check"></i> Timeline creation</li>
+                    <li><i class="fas fa-check"></i> Budget planning</li>
+                    <li><i class="fas fa-check"></i> Day-of coordination</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Corporate Events</h3>
+                <p>Professional event management for conferences, product launches, and corporate gatherings.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Conference planning</li>
+                    <li><i class="fas fa-check"></i> Team building events</li>
+                    <li><i class="fas fa-check"></i> Product launches</li>
+                    <li><i class="fas fa-check"></i> Annual galas</li>
+                    <li><i class="fas fa-check"></i> Trade show booths</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <h3>Social Celebrations</h3>
+                <p>Birthdays, anniversaries, and milestone celebrations designed to reflect your personality.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Themed parties</li>
+                    <li><i class="fas fa-check"></i> Milestone birthdays</li>
+                    <li><i class="fas fa-check"></i> Anniversary parties</li>
+                    <li><i class="fas fa-check"></i> Engagement parties</li>
+                    <li><i class="fas fa-check"></i> Baby showers</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-photo-video"></i>
+                </div>
+                <h3>Event Production</h3>
+                <p>Full-scale production services including lighting, sound, staging, and technical support.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> AV equipment</li>
+                    <li><i class="fas fa-check"></i> Lighting design</li>
+                    <li><i class="fas fa-check"></i> Stage design</li>
+                    <li><i class="fas fa-check"></i> Technical crew</li>
+                    <li><i class="fas fa-check"></i> Live streaming</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Catering Coordination</h3>
+                <p>We partner with top caterers to create customized menus that delight your guests.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Menu planning</li>
+                    <li><i class="fas fa-check"></i> Dietary accommodations</li>
+                    <li><i class="fas fa-check"></i> Beverage service</li>
+                    <li><i class="fas fa-check"></i> Wait staff</li>
+                    <li><i class="fas fa-check"></i> Cake design</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Venue Sourcing</h3>
+                <p>Access to exclusive venues and spaces that match your event's theme and requirements.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Unique locations</li>
+                    <li><i class="fas fa-check"></i> Hotel ballrooms</li>
+                    <li><i class="fas fa-check"></i> Outdoor spaces</li>
+                    <li><i class="fas fa-check"></i> Historic venues</li>
+                    <li><i class="fas fa-check"></i> Destination venues</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pricing-section">
+            <h3 class="section-title">Service Packages</h3>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">We offer flexible pricing options to suit every budget and event size. All packages include our signature attention to detail and creative flair.</p>
+            
+            <div class="pricing-options">
+                <div class="pricing-tier">
+                    <h4>Essential</h4>
+                    <div class="price">$1,500<span> / event</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Basic event coordination</li>
+                        <li><i class="fas fa-check"></i> Vendor recommendations</li>
+                        <li><i class="fas fa-check"></i> Timeline management</li>
+                        <li><i class="fas fa-check"></i> 3 planning meetings</li>
+                        <li><i class="fas fa-check"></i> Day-of coordination</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-tier" style="border: 2px solid #f8a5c2;">
+                    <div style="position: absolute; top: -10px; right: 20px; background: #f8a5c2; color: white; padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.8rem;">MOST POPULAR</div>
+                    <h4>Premium</h4>
+                    <div class="price">$3,500<span> / event</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Full event planning</li>
+                        <li><i class="fas fa-check"></i> Vendor management</li>
+                        <li><i class="fas fa-check"></i> Budget planning</li>
+                        <li><i class="fas fa-check"></i> Unlimited planning meetings</li>
+                        <li><i class="fas fa-check"></i> Design concept development</li>
+                        <li><i class="fas fa-check"></i> Month-of coordination</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-tier">
+                    <h4>Platinum</h4>
+                    <div class="price">$6,000+<span> / event</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Concierge-level service</li>
+                        <li><i class="fas fa-check"></i> Full design & production</li>
+                        <li><i class="fas fa-check"></i> Dedicated planning team</li>
+                        <li><i class="fas fa-check"></i> Custom decor & lighting</li>
+                        <li><i class="fas fa-check"></i> VIP guest services</li>
+                        <li><i class="fas fa-check"></i> 3-month coordination</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 class="section-title">Our Process</h3>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Discovery</h4>
+                    <p>We learn about your vision, preferences, and requirements through detailed consultations.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Planning</h4>
+                    <p>Our team creates a customized plan with timelines, budgets, and design concepts.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Execution</h4>
+                    <p>We handle all logistics and coordination to bring your event to life flawlessly.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Enjoyment</h4>
+                    <p>You relax and enjoy your event while we manage every detail behind the scenes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">
+            <img src="https://via.placeholder.com/40x40?text=RER" alt="RER Events Logo">
+            <h1>RER EVENTS</h1>
+        </div>
+        <p class="copyright">© 2023 RER Events. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .pricing-tier, .process-step');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial check in case elements are already in view
+        animateOnScroll();
+    </script>
+</body>
+</html>
